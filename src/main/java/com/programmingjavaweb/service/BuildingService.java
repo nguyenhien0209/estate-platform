@@ -10,4 +10,5 @@ public interface BuildingService {
     BuildingModel update (BuildingModel buildingModel);
     void delete (Long[] ids);
     List<BuildingModel> findAll(Pageble pageble);
+    int getTotalItem();
 }

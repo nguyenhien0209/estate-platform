@@ -70,4 +70,10 @@ public class BuildingDAOImpl extends AbstractDAO<BuildingModel> implements Build
         }
         return query(sql.toString(), new BuildingMapper());
     }
+
+    @Override
+    public int getTotalItem() {
+        StringBuilder sql = new StringBuilder("SELECT count(*) FROM building ");
+        return count(sql.toString());
+    }
 }

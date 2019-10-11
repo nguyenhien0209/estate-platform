@@ -11,11 +11,13 @@ import com.programmingjavaweb.utils.FormUtils;
 import javax.inject.Inject;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
+@WebServlet(urlPatterns = {"/admin-building"})
 public class BuildingController extends HttpServlet {
 
     @Inject
@@ -28,7 +30,9 @@ public class BuildingController extends HttpServlet {
         if(model.getType().equals(SystemConstant.LIST)) {
             Pageble pageble = new PageRequest(model.getPage(), model.getMaxPageItems(), new Sorter(model.getSortName(), model.getSortBy()));
             model.setListResult(buildingService.findAll(pageble));
-
+            model.setTotalItems(buildingService.getTotalItem());
+            model.setTotalPages((int)Math.ceil((double)model.getTotalItems() / model.getMaxPageItems()));
+            view = "/views/admin/building/list.jsp";
         } else if (model.getType().equals(SystemConstant.EDIT)) {
 
         }

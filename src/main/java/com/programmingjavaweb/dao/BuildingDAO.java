@@ -11,4 +11,5 @@ public interface BuildingDAO extends GenericDAO<BuildingModel> {
     void delete (Long id);
     BuildingModel findOne(Long id);
     List<BuildingModel> findAll (Pageble pageble);
+    int getTotalItem();
 }

@@ -43,4 +43,9 @@ public class BuildingServiceImpl implements BuildingService {
     public List<BuildingModel> findAll(Pageble pageble) {
         return buildingDAO.findAll(pageble);
     }
+
+    @Override
+    public int getTotalItem() {
+        return buildingDAO.getTotalItem();
+    }
 }
