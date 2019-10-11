@@ -100,9 +100,16 @@
                                         <thead>
                                         <tr>
                                             <th><input type="checkbox" class="check-box-element" id="checkAll"></th>
-                                            <th>Tên bài viết</th>
-                                            <th>Mô tả ngắn</th>
-                                            <th>Lượt xem</th>
+                                            <th>Ngày</th>
+                                            <th>Tên Sản Phẩm</th>
+                                            <th>Địa chỉ</th>
+                                            <th>Tên quản lý</th>
+                                            <th>Số điện thoại</th>
+                                            <th>D.T sàn</th>
+                                            <th>D.T trống</th>
+                                            <th>Giá thuê</th>
+                                            <th>Phí dịch vụ</th>
+                                            <th>Phí MG</th>
                                             <th>Thao tác</th>
                                         </tr>
                                         </thead>
@@ -110,9 +117,16 @@
                                         <c:forEach items="${model.listResult}" var="item">
                                             <tr>
                                                 <td><input type="checkbox" class="check-box-element" id="checkbox_${item.id}" value="${item.id}"></td>
-                                                <td>${item.title}</td>
-                                                <td>${item.shortDescription}</td>
-                                                <td>${item.view}</td>
+                                                <td>${item.timeContract}</td>
+                                                <td>${item.name}</td>
+                                                <td>${item.street}, ${item.ward}, ${item.district}</td>
+                                                <td>${item.managerName}</td>
+                                                <td>${item.managerPhone}</td>
+                                                <td>${item.buildingArea}</td>
+                                                <td>${item.rentArea}</td>
+                                                <td>${item.costRent}</td>
+                                                <td>${item.serviceCost}</td>
+                                                <td>${item.commission}</td>
                                                 <td>
                                                     <c:url value="/admin-news" var="editURL">
                                                         <c:param name="type" value="edit" />

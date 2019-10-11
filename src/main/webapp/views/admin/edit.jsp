@@ -30,7 +30,20 @@
                     </c:if>
                     <form id="formSubmit">
                         <div class="form-group">
-                            <label class="col-sm-3 control-label no-padding-right">Thể loại</label>
+                            <label class="col-sm-3 control-label no-padding-right">Tên tòa nhà</label>
+                            <div class="col-sm-9">
+                                <input type="text" class="form-control" id="name" name="name" value="${model.name}">
+                            </div>
+                        </div>
+                        <br />
+                        <br />
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label no-padding-right">Người quản lý tòa nhà</label>
+                        </div>
+                        <br />
+                        <br />
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label no-padding-right">Quận</label>
                             <div class="col-sm-9">
                                 <select class="form-control" id="categoryCode" name="categoryCode">
                                     <c:if test="${empty model.categoryCode}">
@@ -55,9 +68,216 @@
                         <br />
                         <br />
                         <div class="form-group">
-                            <label class="col-sm-3 control-label no-padding-right">Tiêu đề</label>
+                            <label class="col-sm-3 control-label no-padding-right">Phường</label>
                             <div class="col-sm-9">
-                                <input type="text" class="form-control" id="title" name="title" value="${model.title}">
+                                <input type="text" class="form-control" id="ward" name="ward" value="${model.ward}">
+                            </div>
+                        </div>
+                        <br />
+                        <br />
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label no-padding-right">Đường</label>
+                            <div class="col-sm-9">
+                                <input type="text" class="form-control" id="street" name="street" value="${model.street}">
+                            </div>
+                        </div>
+                        <br />
+                        <br />
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label no-padding-right">Kết cấu</label>
+                            <div class="col-sm-9">
+                                <input type="text" class="form-control" id="structure" name="structure" value="${model.structure}">
+                            </div>
+                        </div>
+                        <br />
+                        <br />
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label no-padding-right">Số tầng hầm</label>
+                            <div class="col-sm-9">
+                                <input type="text" class="form-control" id="numberOfBasement" name="numberOfBasement" value="${model.numberOfBasement}">
+                            </div>
+                        </div>
+                        <br />
+                        <br />
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label no-padding-right">Diện tích sàn</label>
+                            <div class="col-sm-9">
+                                <input type="text" class="form-control" id="buildingArea" name="buildingArea" value="${model.buildingArea}">
+                            </div>
+                        </div>
+                        <br />
+                        <br />
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label no-padding-right">Hướng</label>
+                            <div class="col-sm-9">
+                                <input type="text" class="form-control" id="direction" name="direction" value="${model.direction}">
+                            </div>
+                        </div>
+                        <br />
+                        <br />
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label no-padding-right">Hạng</label>
+                            <div class="col-sm-9">
+                                <input type="text" class="form-control" id="levelBuilding" name="levelBuilding" value="${model.levelBuilding}">
+                            </div>
+                        </div>
+                        <br />
+                        <br />
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label no-padding-right">Diện tích thuê</label>
+                            <div class="col-sm-9">
+                                <input type="text" class="form-control" id="rentArea" name="rentArea" value="${model.rentArea}">
+                            </div>
+                        </div>
+                        <br />
+                        <br />
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label no-padding-right">Mô tả diện tích</label>
+                            <div class="col-sm-9">
+                                <textarea class="form-control" id="areaDescription" name="areaDescription" >${model.areaDescription}</textarea>
+                            </div>
+                        </div>
+                        <br />
+                        <br />
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label no-padding-right">Giá thuê</label>
+                            <div class="col-sm-9">
+                                <input type="text" class="form-control" id="costRent" name="costRent" value="${model.costRent}">
+                            </div>
+                        </div>
+                        <br />
+                        <br />
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label no-padding-right">Mô tả giá</label>
+                            <div class="col-sm-9">
+                                <input type="text" class="form-control" id="costDescription" name="costDescription" value="${model.costDescription}">
+                            </div>
+                        </div>
+                        <br />
+                        <br />
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label no-padding-right">Phí dịch vụ</label>
+                            <div class="col-sm-9">
+                                <input type="text" class="form-control" id="serviceCost" name="serviceCost" value="${model.serviceCost}">
+                            </div>
+                        </div>
+                        <br />
+                        <br />
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label no-padding-right">Phí ô tô</label>
+                            <div class="col-sm-9">
+                                <input type="text" class="form-control" id="carCost" name="carCost" value="${model.carCost}">
+                            </div>
+                        </div>
+                        <br />
+                        <br />
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label no-padding-right">Phí mô tô</label>
+                            <div class="col-sm-9">
+                                <input type="text" class="form-control" id="motorbikeCost" name="motorbikeCost" value="${model.motorbikeCost}">
+                            </div>
+                        </div>
+                        <br />
+                        <br />
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label no-padding-right">Phí ngoài giờ</label>
+                            <div class="col-sm-9">
+                                <input type="text" class="form-control" id="overtimeCost" name="overtimeCost" value="${model.overtimeCost}">
+                            </div>
+                        </div>
+                        <br />
+                        <br />
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label no-padding-right">Tiền điện</label>
+                            <div class="col-sm-9">
+                                <input type="text" class="form-control" id="electricityCost" name="electricityCost" value="${model.electricityCost}">
+                            </div>
+                        </div>
+                        <br />
+                        <br />
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label no-padding-right">Đặt cọc</label>
+                            <div class="col-sm-9">
+                                <input type="text" class="form-control" id="deposit" name="deposit" value="${model.deposit}">
+                            </div>
+                        </div>
+                        <br />
+                        <br />
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label no-padding-right">Thanh toán</label>
+                            <div class="col-sm-9">
+                                <input type="text" class="form-control" id="payment" name="payment" value="${model.payment}">
+                            </div>
+                        </div>
+                        <br />
+                        <br />
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label no-padding-right">Thời hạn thuê</label>
+                            <div class="col-sm-9">
+                                <input type="text" class="form-control" id="timeContract" name="timeContract" value="${model.timeContract}">
+                            </div>
+                        </div>
+                        <br />
+                        <br />
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label no-padding-right">Thời gian trang trí</label>
+                            <div class="col-sm-9">
+                                <input type="text" class="form-control" id="timeDecorator" name="timeDecorator" value="${model.timeDecorator}">
+                            </div>
+                        </div>
+                        <br />
+                        <br />
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label no-padding-right">Tên quản lý</label>
+                            <div class="col-sm-9">
+                                <input type="text" class="form-control" id="managerName" name="managerName" value="${model.managerName}">
+                            </div>
+                        </div>
+                        <br />
+                        <br />
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label no-padding-right">SĐT quản lý</label>
+                            <div class="col-sm-9">
+                                <input type="text" class="form-control" id="managerPhone" name="managerPhone" value="${model.managerPhone}">
+                            </div>
+                        </div>
+                        <br />
+                        <br />
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label no-padding-right">Phí môi giới</label>
+                            <div class="col-sm-9">
+                                <input type="text" class="form-control" id="commission" name="commission" value="${model.commission}">
+                            </div>
+                        </div>
+                        <br />
+                        <br />
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label no-padding-right">Loại Sản phẩm</label>
+                            <div class="col-sm-9">
+                            </div>
+                        </div>
+                        <br />
+                        <br />
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label no-padding-right">Ghi chú</label>
+                            <div class="col-sm-9">
+                                <textarea class="form-control" id="note" name="note" >${model.note}</textarea>
+                            </div>
+                        </div>
+                        <br />
+                        <br />
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label no-padding-right">Link Sản phẩm</label>
+                            <div class="col-sm-9">
+                                <input type="text" class="form-control" id="link" name="link" value="${model.link}">
+                            </div>
+                        </div>
+                        <br />
+                        <br />
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label no-padding-right">Bản đồ</label>
+                            <div class="col-sm-9">
+                                <input type="text" class="form-control" id="location" name="location" value="${model.location}">
                             </div>
                         </div>
                         <br />
@@ -65,23 +285,7 @@
                         <div class="form-group">
                             <label class="col-sm-3 control-label no-padding-right">Hình đại diện</label>
                             <div class="col-sm-9">
-                                <input type="text" class="form-control" id="thumbnail" name="thumbnail" value="">
-                            </div>
-                        </div>
-                        <br />
-                        <br />
-                        <div class="form-group">
-                            <label class="col-sm-3 control-label no-padding-right">Mô tả ngắn</label>
-                            <div class="col-sm-9">
-                                <input type="text" class="form-control" id="shortDescription" name="shortDescription" value="${model.shortDescription}">
-                            </div>
-                        </div>
-                        <br />
-                        <br />
-                        <div class="form-group">
-                            <label class="col-sm-3 control-label no-padding-right">Nội dung</label>
-                            <div class="col-sm-9">
-                                <input type="text" class="form-control" id="content" name="content" value="${model.content}">
+                                <input type="text" class="form-control" id="image" name="image" value="${model.image}">
                             </div>
                         </div>
                         <br />
