@@ -10,9 +10,9 @@ public class BuildingDAOImpl extends AbstractDAO<BuildingModel> implements Build
     @Override
     public Long save(BuildingModel buildingModel) {
         StringBuilder sql = new StringBuilder("INSERT INTO building (name, district, ward, street, structure, numberofbasement," +
-                " buildingarea, direction, levelbuilding, rentarea, areadescription, costrent, costdescription, servicecost" +
-                " carcost, motorbikecost, overtimecost, electricitycost, deposit, payment, timecontract, timedecorator" +
-                " managername, managerphone, commission, note, link, location, image, type, createddate, modifieddate ) ");
+                " buildingarea, direction, levelbuilding, rentarea, areadescription, costrent, costdescription, servicecost," +
+                " carcost, motorbikecost, overtimecost, electricitycost, deposit, payment, timecontract, timedecorator," +
+                " managername, managerphone, commission, note, link, location, image, type, createddate, createdby ) ");
         sql.append(" VALUES( ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ? )" );
         return insert(sql.toString(), buildingModel.getName(), buildingModel.getDistrict(), buildingModel.getWard(), buildingModel.getStreet(),
                 buildingModel.getStructure(), buildingModel.getNumberOfBasement(), buildingModel.getBuildingArea(), buildingModel.getDirection(),
@@ -21,7 +21,7 @@ public class BuildingDAOImpl extends AbstractDAO<BuildingModel> implements Build
                 buildingModel.getOvertimeCost(), buildingModel.getElectricityCost(), buildingModel.getDeposit(), buildingModel.getPayment(),
                 buildingModel.getTimeContract(), buildingModel.getTimeDecorator(), buildingModel.getManagerName(), buildingModel.getManagerPhone(),
                 buildingModel.getCommission(), buildingModel.getNote(), buildingModel.getLink(), buildingModel.getLocation(), buildingModel.getImage(),
-                buildingModel.getType(), buildingModel.getCreatedDate(), buildingModel.getModifiedDate());
+                buildingModel.getType(), buildingModel.getCreatedDate(), buildingModel.getCreatedBy());
     }
 
     @Override
@@ -30,8 +30,8 @@ public class BuildingDAOImpl extends AbstractDAO<BuildingModel> implements Build
                 "numberofbasement = ?, buildingarea = ?, direction = ?, levelbuilding = ?, rentarea = ?, areadescription = ?, " +
                 "costrent = ?, costdescription = ?, servicecost = ?, carcost = ?, motorbikecost = ?, overtimecost = ?, electricitycost = ?," +
                 "deposit = ?, payment = ?, timecontract = ?, timedecorator = ?, managername = ?, managerphone = ?, commission = ?, " +
-                "note = ?, link = ?, location = ?, image = ?, type = ?, createdby = ?, modifiedby = ?, createddate = ?, modifieddate = ? ) ");
-        sql.append(" WHERE id = ?");
+                "note = ?, link = ?, location = ?, image = ?, type = ?, createdby = ?, modifiedby = ?, createddate = ?, modifieddate = ?  ");
+        sql.append(" WHERE id = ? ");
         update(sql.toString(), buildingModel.getName(), buildingModel.getDistrict(), buildingModel.getWard(), buildingModel.getStreet(),
                 buildingModel.getStructure(), buildingModel.getNumberOfBasement(), buildingModel.getBuildingArea(), buildingModel.getDirection(),
                 buildingModel.getLevelBuilding(), buildingModel.getRentArea(), buildingModel.getAreaDescription(), buildingModel.getCostRent(),

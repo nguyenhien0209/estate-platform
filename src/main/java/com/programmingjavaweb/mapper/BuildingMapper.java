@@ -12,7 +12,7 @@ public class BuildingMapper implements RowMapper<BuildingModel> {
             BuildingModel model = new BuildingModel();
             model.setId(resultSet.getLong("id"));
             model.setName(resultSet.getString("name"));
-            model.setDeposit(resultSet.getString("district"));
+            model.setDistrict(resultSet.getString("district"));
             model.setWard(resultSet.getString("ward"));
             model.setStreet(resultSet.getString("street"));
             model.setStructure(resultSet.getString("structure"));

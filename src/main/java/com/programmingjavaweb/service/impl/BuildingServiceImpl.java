@@ -21,7 +21,12 @@ public class BuildingServiceImpl implements BuildingService {
 
     @Override
     public BuildingModel update(BuildingModel buildingModel) {
-        return null;
+        BuildingModel oldBuilding = buildingDAO.findOne(buildingModel.getId());
+        buildingModel.setCreatedDate(oldBuilding.getCreatedDate());
+        buildingModel.setCreatedBy(oldBuilding.getCreatedBy());
+        buildingModel.setModifiedDate(new Timestamp(System.currentTimeMillis()));
+        buildingDAO.update(buildingModel);
+        return buildingDAO.findOne(buildingModel.getId());
     }
 
     @Override

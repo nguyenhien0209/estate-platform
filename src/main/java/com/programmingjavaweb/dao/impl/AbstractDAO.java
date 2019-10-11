@@ -67,6 +67,7 @@ public class AbstractDAO<T> implements GenericDAO<T> {
         PreparedStatement statement = null;
         try {
             connection = getConnection();
+            connection.setAutoCommit(false);
             statement = connection.prepareStatement(sql);
             setParameters(statement, parameters);
             statement.executeUpdate();
@@ -101,6 +102,7 @@ public class AbstractDAO<T> implements GenericDAO<T> {
         Long id = null;
         try {
             connection = getConnection();
+            connection.setAutoCommit(false);
             statement = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
             setParameters(statement, parameters);
             statement.executeUpdate();
@@ -176,8 +178,8 @@ public class AbstractDAO<T> implements GenericDAO<T> {
 
     private void setParameters(PreparedStatement statement, Object... parameters) {
         try {
-            for(int i = 0; i < parameters.length; i++) {
-                statement.setObject(i + 1, parameters[i + 1]);
+            for(int i = 0; i < parameters.length ; i++) {
+                statement.setObject(i + 1, parameters[i]);
             }
         } catch (SQLException e) {
             e.printStackTrace();
