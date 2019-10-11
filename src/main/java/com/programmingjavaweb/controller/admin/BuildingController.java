@@ -5,6 +5,7 @@ import com.programmingjavaweb.model.BuildingModel;
 import com.programmingjavaweb.paging.PageRequest;
 import com.programmingjavaweb.paging.Pageble;
 import com.programmingjavaweb.service.BuildingService;
+import com.programmingjavaweb.service.DistrictService;
 import com.programmingjavaweb.sort.Sorter;
 import com.programmingjavaweb.utils.FormUtils;
 
@@ -23,6 +24,9 @@ public class BuildingController extends HttpServlet {
     @Inject
     private BuildingService buildingService;
 
+    @Inject
+    private DistrictService districtService;
+
     protected void doGet (HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         BuildingModel model = FormUtils.toModel(BuildingModel.class, request);
@@ -34,6 +38,10 @@ public class BuildingController extends HttpServlet {
             model.setTotalPages((int)Math.ceil((double)model.getTotalItems() / model.getMaxPageItems()));
             view = "/views/admin/building/list.jsp";
         } else if (model.getType().equals(SystemConstant.EDIT)) {
+            if(model.getId() != null) {
+                model = buildingService.findOne(model.getId());
+            }
+            request.setAttribute(SystemConstant.DISTRICTS, districtService.findAll());
             view = "/views/admin/building/edit.jsp";
         }
         request.setAttribute(SystemConstant.MODEL, model);

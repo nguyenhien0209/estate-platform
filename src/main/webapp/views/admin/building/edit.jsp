@@ -45,17 +45,17 @@
                         <div class="form-group">
                             <label class="col-sm-3 control-label no-padding-right">Quận</label>
                             <div class="col-sm-9">
-                                <select class="form-control" id="categoryCode" name="categoryCode">
-                                    <c:if test="${empty model.categoryCode}">
-                                        <option value="">Chọn loại bài viết</option>
-                                        <c:forEach var="item" items="${categories}">
-                                            <option value="${item.code}">${item.name}</option>
+                                <select class="form-control" id="district" name="district">
+                                    <c:if test="${empty model.district}">
+                                        <option value=""> -- Chọn quận -- </option>
+                                        <c:forEach var="item" items="${districts}">
+                                            <option value="${item.districtCode}">${item.name}</option>
                                         </c:forEach>
                                     </c:if>
-                                    <c:if test="${not empty model.categoryCode}">
-                                        <c:forEach var="item" items="${categories}">
-                                            <option value="${item.code}"
-                                                    <c:if test="${item.code == model.categoryCode}">
+                                    <c:if test="${not empty model.district}">
+                                        <c:forEach var="item" items="${districts}">
+                                            <option value="${item.districtCode}"
+                                                    <c:if test="${item.districtCode == model.district}">
                                                         selected="selected"
                                                     </c:if>>
                                                     ${item.name}
@@ -137,6 +137,7 @@
                                 <textarea class="form-control" id="areaDescription" name="areaDescription" >${model.areaDescription}</textarea>
                             </div>
                         </div>
+                        <br />
                         <br />
                         <br />
                         <div class="form-group">
@@ -266,6 +267,7 @@
                         </div>
                         <br />
                         <br />
+                        <br />
                         <div class="form-group">
                             <label class="col-sm-3 control-label no-padding-right">Link Sản phẩm</label>
                             <div class="col-sm-9">
@@ -293,10 +295,10 @@
                         <div class="form-group">
                             <div class="col-sm-12">
                                 <c:if test="${not empty model.id}">
-                                    <input type="button" class="btn btn-white btn-warning btn-bold" id="btnAddOrUpdateNews" value="Cập nhập bài viết">
+                                    <input type="button" class="btn btn-white btn-warning btn-bold" id="btnAddOrUpdateNews" value="Cập nhập tòa nhà">
                                 </c:if>
                                 <c:if test="${empty model.id}">
-                                    <input type="button" class="btn btn-white btn-warning btn-bold" id="btnAddOrUpdateNews" value="Thêm mới bài viết">
+                                    <input type="button" class="btn btn-white btn-warning btn-bold" id="btnAddOrUpdateNews" value="Thêm mới tòa nhà">
                                 </c:if>
                             </div>
                         </div>

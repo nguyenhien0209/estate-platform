@@ -11,4 +11,5 @@ public interface BuildingService {
     void delete (Long[] ids);
     List<BuildingModel> findAll(Pageble pageble);
     int getTotalItem();
+    BuildingModel findOne(Long id);
 }

@@ -48,4 +48,9 @@ public class BuildingServiceImpl implements BuildingService {
     public int getTotalItem() {
         return buildingDAO.getTotalItem();
     }
+
+    @Override
+    public BuildingModel findOne(Long id) {
+        return buildingDAO.findOne(id);
+    }
 }
