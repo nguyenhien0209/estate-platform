@@ -78,14 +78,14 @@
                                         <a flag="info"
                                            class="dt-button buttons-colvis btn btn-white btn-primary btn-bold"
                                            data-toggle="tooltip"
-                                           title="Thêm bài viết" href='<c:url value="/admin-building?type=edit" />'>
+                                           title="Thêm tòa nhà" href='<c:url value="/admin-building?type=edit" />'>
                                             <span>
                                                 <i class="fa fa-plus-circle bigger-110 purple"></i>
                                             </span>
                                         </a>
                                         <button id="btnDelete" type="button" disabled
                                                 class="dt-button buttons-html5 btn btn-white btn-primary btn-bold"
-                                                data-toggle="tooltip" title="Xóa bài viết">
+                                                data-toggle="tooltip" title="Xóa tòa nhà">
                                             <span>
                                                 <i class="fa fa-trash-o bigger-110 pink"></i>
                                             </span>
@@ -135,7 +135,7 @@
                                                         <c:param name="id" value="${item.id}"/>
                                                     </c:url>
                                                     <a class="btn btn-sm btn-primary btn-edit" data-toggle="tooltip"
-                                                       title="Cập nhập bài viết" href="${editURL}">
+                                                       title="Cập nhập tòa nhà" href="${editURL}">
                                                         <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
                                                     </a>
                                                 </td>
@@ -145,7 +145,7 @@
                                     </table>
                                     <ul class="pagination" id="pagination"></ul>
                                     <input type="hidden" value="" name="page" id="page">
-                                    <input type="hidden" value="" name="maxPageItem" id="maxPageItem">
+                                    <input type="hidden" value="" name="maxPageItems" id="maxPageItems">
                                     <input type="hidden" value="" name="sortName" id="sortName">
                                     <input type="hidden" value="" name="sortBy" id="sortBy">
                                     <input type="hidden" value="" name="type" id="type">
@@ -159,6 +159,26 @@
     </div>
 </div><!-- /.main-content -->
 <script type="text/javascript">
+    var totalPages = ${model.totalPages};
+    var currentPage = ${model.page};
+    var limit = 2;
+    $(function () {
+        window.pagObj = $('#pagination').twbsPagination({
+            totalPages: totalPages,
+            visiblePages: 10,
+            startPage: currentPage,
+            onPageClick: function (event, page) {
+                if(page != currentPage) {
+                    $('#page').val(page);
+                    $('#maxPageItems').val(limit);
+                    $('#sortName').val("name");
+                    $('#sortBy').val("desc");
+                    $('#type').val("list");
+                    $('#formSubmit').submit();
+                }
+            }
+        });
+    });
 </script>
 </body>
 </html>

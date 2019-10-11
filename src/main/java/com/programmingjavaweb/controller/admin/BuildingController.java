@@ -34,7 +34,7 @@ public class BuildingController extends HttpServlet {
             model.setTotalPages((int)Math.ceil((double)model.getTotalItems() / model.getMaxPageItems()));
             view = "/views/admin/building/list.jsp";
         } else if (model.getType().equals(SystemConstant.EDIT)) {
-
+            view = "/views/admin/building/edit.jsp";
         }
         request.setAttribute(SystemConstant.MODEL, model);
         RequestDispatcher rd = request.getRequestDispatcher(view);
