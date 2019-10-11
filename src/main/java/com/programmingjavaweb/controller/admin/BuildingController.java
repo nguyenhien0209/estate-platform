@@ -1,6 +1,7 @@
 package com.programmingjavaweb.controller.admin;
 
 import com.programmingjavaweb.constant.SystemConstant;
+import com.programmingjavaweb.enums.BuildingTypeEnum;
 import com.programmingjavaweb.model.BuildingModel;
 import com.programmingjavaweb.paging.PageRequest;
 import com.programmingjavaweb.paging.Pageble;
@@ -17,6 +18,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.Arrays;
 
 @WebServlet(urlPatterns = {"/admin-building"})
 public class BuildingController extends HttpServlet {
@@ -44,6 +46,7 @@ public class BuildingController extends HttpServlet {
             request.setAttribute(SystemConstant.DISTRICTS, districtService.findAll());
             view = "/views/admin/building/edit.jsp";
         }
+        request.setAttribute(SystemConstant.BUILDING_TYPE, BuildingTypeEnum.values());
         request.setAttribute(SystemConstant.MODEL, model);
         RequestDispatcher rd = request.getRequestDispatcher(view);
         rd.forward(request, response);

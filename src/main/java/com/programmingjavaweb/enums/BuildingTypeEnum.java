@@ -5,13 +5,13 @@ public enum BuildingTypeEnum {
     NGUYEN_CAN("Nguyên căn"),
     TANG_HAM("Tầng hầm");
 
-    private String name;
+    private String value;
 
-    BuildingTypeEnum(String name) {
-        this.name = name;
+    BuildingTypeEnum(String value) {
+        this.value = value;
     }
 
-    public String getName() {
-        return this.name;
+    public String getValue() {
+        return this.value;
     }
 }

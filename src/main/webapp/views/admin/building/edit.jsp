@@ -255,8 +255,12 @@
                         <div class="form-group">
                             <label class="col-sm-3 control-label no-padding-right">Loại Sản phẩm</label>
                             <div class="col-sm-9">
+                                <c:forEach var="type" items="${buildingType}">
+                                    <input type="checkbox" value="${type.name()}" id="" name="typeArrays">${type.value}<br />
+                                </c:forEach>
                             </div>
                         </div>
+                        <br />
                         <br />
                         <br />
                         <div class="form-group">
