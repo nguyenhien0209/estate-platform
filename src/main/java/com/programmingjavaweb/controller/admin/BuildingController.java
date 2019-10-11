@@ -36,6 +36,7 @@ public class BuildingController extends HttpServlet {
         } else if (model.getType().equals(SystemConstant.EDIT)) {
 
         }
+        request.setAttribute(SystemConstant.MODEL, model);
         RequestDispatcher rd = request.getRequestDispatcher(view);
         rd.forward(request, response);
     }
