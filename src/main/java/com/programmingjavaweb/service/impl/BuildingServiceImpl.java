@@ -2,10 +2,12 @@ package com.programmingjavaweb.service.impl;
 
 import com.programmingjavaweb.dao.BuildingDAO;
 import com.programmingjavaweb.model.BuildingModel;
+import com.programmingjavaweb.paging.Pageble;
 import com.programmingjavaweb.service.BuildingService;
 
 import javax.inject.Inject;
 import java.sql.Timestamp;
+import java.util.List;
 
 public class BuildingServiceImpl implements BuildingService {
 
@@ -35,5 +37,10 @@ public class BuildingServiceImpl implements BuildingService {
         for(Long id : ids){
             buildingDAO.delete(id);
         }
+    }
+
+    @Override
+    public List<BuildingModel> findAll(Pageble pageble) {
+        return buildingDAO.findAll(pageble);
     }
 }

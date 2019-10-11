@@ -3,6 +3,8 @@ package com.programmingjavaweb.dao.impl;
 import com.programmingjavaweb.dao.BuildingDAO;
 import com.programmingjavaweb.mapper.BuildingMapper;
 import com.programmingjavaweb.model.BuildingModel;
+import com.programmingjavaweb.paging.Pageble;
+import org.apache.commons.lang.StringUtils;
 
 import java.util.List;
 
@@ -54,5 +56,18 @@ public class BuildingDAOImpl extends AbstractDAO<BuildingModel> implements Build
         String sql = "SELECT * FROM building WHERE id = ?";
         List<BuildingModel> buildingModels = query(sql, new BuildingMapper(),id);
         return buildingModels.isEmpty() ? null : buildingModels.get(0);
+    }
+
+    @Override
+    public List<BuildingModel> findAll(Pageble pageble) {
+        StringBuilder sql = new StringBuilder("SELECT * FROM building as b ");
+        sql.append(" WHERE 1 = 1");
+        if(StringUtils.isNotBlank(pageble.getSorter().getSortName()) && StringUtils.isNotBlank(pageble.getSorter().getSortBy())) {
+            sql.append(" ORDER BY " + pageble.getSorter().getSortName() + " " + pageble.getSorter().getSortBy() + " ");
+        }
+        if(pageble.getOffset() != null && pageble.getLimit() != null) {
+            sql.append(" LIMIT " + pageble.getOffset() + "," + pageble.getLimit() + " ");
+        }
+        return query(sql.toString(), new BuildingMapper());
     }
 }
