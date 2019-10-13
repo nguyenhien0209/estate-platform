@@ -15,11 +15,20 @@ public class AbstractModel<T> {
     private String sortBy;
     private String sortName;
     private String message;
+    private String alert;
     private String type;
     private int page;
     private int totalPages;
     private int totalItems;
     private int maxPageItems;
+
+    public String getAlert() {
+        return alert;
+    }
+
+    public void setAlert(String alert) {
+        this.alert = alert;
+    }
 
     public List<T> getListResult() {
         return listResult;
