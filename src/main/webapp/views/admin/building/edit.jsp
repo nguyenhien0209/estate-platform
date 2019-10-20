@@ -279,12 +279,14 @@
                         <br/>
                         <div class="form-group">
                             <label class="col-sm-3 control-label no-padding-right">Loại Sản phẩm</label>
-                            <%--<div class="col-sm-9">--%>
-                                <%--<c:forEach var="type" items="${buildingType}">--%>
-                                    <%--<input type="checkbox" value="${type.name()}" id="" name="typeArrays">${type.value}--%>
-                                    <%--<br/>--%>
-                                <%--</c:forEach>--%>
-                            <%--</div>--%>
+                            <div class="col-sm-9">
+                                <c:if test="${empty model.id}">
+                                    <c:forEach var="item" items="${buildingType}">
+                                        <input type="checkbox" value="${item}" id="checkbox_${item}" name="typeArrays">${item.value}
+                                        <br/>
+                                    </c:forEach>
+                                </c:if>
+                            </div>
                         </div>
                         <br/>
                         <br/>
@@ -349,6 +351,10 @@
         $.each(formData, function (index, value) { // value {name:value}
             data["" + value.name + ""] = value.value;
         });
+        var dataType = $('input[type=checkbox]:checked').map(function () {
+            return $(this).val();
+        }).get();
+        data["typeArrays"] = dataType;
         var id = $('#id').val();
         if (id == "") {
             addBuilding(data);

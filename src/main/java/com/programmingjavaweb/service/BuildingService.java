@@ -4,6 +4,7 @@ import com.programmingjavaweb.model.BuildingModel;
 import com.programmingjavaweb.paging.Pageble;
 
 import java.util.List;
+import java.util.Map;
 
 public interface BuildingService {
     BuildingModel save(BuildingModel buildingModel);
@@ -12,4 +13,5 @@ public interface BuildingService {
     List<BuildingModel> findAll(Pageble pageble);
     int getTotalItem();
     BuildingModel findOne(Long id);
+    Map<String, String> getBuildingTypes();
 }

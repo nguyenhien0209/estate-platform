@@ -8,6 +8,7 @@ import com.programmingjavaweb.service.BuildingService;
 import javax.inject.Inject;
 import java.sql.Timestamp;
 import java.util.List;
+import java.util.Map;
 
 public class BuildingServiceImpl implements BuildingService {
 
@@ -17,7 +18,7 @@ public class BuildingServiceImpl implements BuildingService {
     @Override
     public BuildingModel save(BuildingModel buildingModel) {
         buildingModel.setCreatedDate(new Timestamp(System.currentTimeMillis()));
-        buildingModel.setCreatedBy("");
+        buildingModel.setType(String.join(",", buildingModel.getTypeArrays()));
         Long newId = buildingDAO.save(buildingModel);
         return buildingDAO.findOne(newId);
     }
@@ -52,5 +53,10 @@ public class BuildingServiceImpl implements BuildingService {
     @Override
     public BuildingModel findOne(Long id) {
         return buildingDAO.findOne(id);
+    }
+
+    @Override
+    public Map<String, String> getBuildingTypes() {
+        return null;
     }
 }
