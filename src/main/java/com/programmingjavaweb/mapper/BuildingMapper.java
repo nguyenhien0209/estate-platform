@@ -1,6 +1,7 @@
 package com.programmingjavaweb.mapper;
 
 import com.programmingjavaweb.model.BuildingModel;
+import org.apache.commons.lang.StringUtils;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -41,7 +42,9 @@ public class BuildingMapper implements RowMapper<BuildingModel> {
             model.setLocation(resultSet.getString("location"));
             model.setImage(resultSet.getString("image"));
             model.setType(resultSet.getString("type"));
-            model.setTypeArrays(resultSet.getString("type").split(","));
+            if(StringUtils.isNotBlank(resultSet.getString("type"))) {
+                model.setTypeArrays(resultSet.getString("type").split(","));
+            }
             model.setCreatedDate(resultSet.getTimestamp("createddate"));
             model.setCreatedBy(resultSet.getString("createdby"));
             if(resultSet.getTimestamp("modifieddate") != null) {

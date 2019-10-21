@@ -73,6 +73,17 @@ CREATE TABLE building (
   modifiedby    VARCHAR(255)
 )
 
+CREATE TABLE rentarea (
+  id            INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
+  value         INT NULL,
+  buildingid    BIGINT NOT NULL,
+  createddate   TIMESTAMP NULL,
+  modifieddate  TIMESTAMP NULL,
+  createdby     VARCHAR(255) NULL,
+  modifiedby    VARCHAR(255) NULL,
+  FOREIGN KEY (buildingid) REFERENCES building(id)
+)
+
 CREATE TABLE assignmentbuilding (
   id            BIGINT NOT NULL PRIMARY KEY AUTO_INCREMENT,
   buildingid    BIGINT NOT NULL,
@@ -85,3 +96,6 @@ CREATE TABLE assignmentbuilding (
   FOREIGN KEY (buildingid) REFERENCES building(id),
   FOREIGN KEY (staffid) REFERENCES user(id)
 )
+
+
+

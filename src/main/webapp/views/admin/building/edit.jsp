@@ -282,7 +282,20 @@
                             <div class="col-sm-9">
                                 <c:if test="${empty model.id}">
                                     <c:forEach var="item" items="${buildingType}">
-                                        <input type="checkbox" value="${item}" id="checkbox_${item}" name="typeArrays">${item.value}
+                                        <input type="checkbox" value="${item}" id="checkbox_${item}"
+                                               name="typeArrays">${item.value}
+                                        <br/>
+                                    </c:forEach>
+                                </c:if>
+                                <c:if test="${not empty model.id}">
+                                    <c:forEach var="item" items="${buildingType}">
+                                        <input type="checkbox" value="${item}" id="checkbox_${item}" name="typeArrays"
+                                        <c:forEach var="itemTemp" items="${model.typeArrays}">
+                                        <c:if test="${itemTemp eq item}">
+                                               checked
+                                        </c:if>
+                                        </c:forEach>
+                                        >${item.value}
                                         <br/>
                                     </c:forEach>
                                 </c:if>
@@ -311,7 +324,8 @@
                         <div class="form-group">
                             <label class="col-sm-3 control-label no-padding-right">Bản đồ</label>
                             <div class="col-sm-9">
-                                <input type="text" class="form-control" id="location" name="location" value="${model.location}">
+                                <input type="text" class="form-control" id="location" name="location"
+                                       value="${model.location}">
                             </div>
                         </div>
                         <br/>
@@ -365,13 +379,13 @@
 
     function addBuilding(data) {
         $.ajax({
-            url:"${APIurl}",
+            url: "${APIurl}",
             type: "POST",
             contentType: "application/json",
             data: JSON.stringify(data),
             dataType: "json",
             success: function (result) {
-                console.log(result);
+                window.location.href = "/admin-building?type=list&page=1&maxPageItems=2&sortName=name&sortBy=desc&message=add_success&alert=success"
             },
             error: function (error) {
                 console.log(error);
@@ -380,7 +394,19 @@
     }
 
     function updateBuilding(data) {
-
+        $.ajax({
+            url: "${APIurl}",
+            type: "PUT",
+            contentType: "application/json",
+            data: JSON.stringify(data),
+            dataType: "json",
+            success: function (result) {
+                window.location.href = "/admin-building?type=list&page=1&maxPageItems=2&sortName=name&sortBy=desc&message=update_success&alert=success"
+            },
+            error: function (error) {
+                console.log(error);
+            }
+        })
     }
 </script>
 </body>

@@ -9,6 +9,7 @@ import com.programmingjavaweb.service.BuildingService;
 import com.programmingjavaweb.service.DistrictService;
 import com.programmingjavaweb.sort.Sorter;
 import com.programmingjavaweb.utils.FormUtils;
+import com.programmingjavaweb.utils.message.MessageUtils;
 
 import javax.inject.Inject;
 import javax.servlet.RequestDispatcher;
@@ -19,6 +20,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.Arrays;
+import java.util.ResourceBundle;
 
 @WebServlet(urlPatterns = {"/admin-building"})
 public class BuildingController extends HttpServlet {
@@ -28,6 +30,8 @@ public class BuildingController extends HttpServlet {
 
     @Inject
     private DistrictService districtService;
+
+    ResourceBundle resourceBundle = ResourceBundle.getBundle("message");
 
     protected void doGet (HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -45,6 +49,9 @@ public class BuildingController extends HttpServlet {
             }
             request.setAttribute(SystemConstant.DISTRICTS, districtService.findAll());
             view = "/views/admin/building/edit.jsp";
+        }
+        if(model.getMessage() != null && model.getAlert() != null) {
+            MessageUtils.of(resourceBundle.getString(model.getMessage()), model.getAlert()).buildMessage(request);
         }
         request.setAttribute(SystemConstant.BUILDING_TYPE, BuildingTypeEnum.values());
         request.setAttribute(SystemConstant.MODEL, model);

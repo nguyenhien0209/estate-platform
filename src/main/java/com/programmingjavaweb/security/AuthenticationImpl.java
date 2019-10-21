@@ -25,7 +25,7 @@ public class AuthenticationImpl implements AuthenticationFilter {
         UserModel model = userService.findUserByUsernameAndPasswordAndStatus(this.userName, this.password, 1);
         if(model != null) {
             SessionUtil.getInstance().putValue(request, SystemConstant.USERMODEL, model);
-            if(model.getRoleModel().getRoleCode().equals("admin")) {
+            if(model.getRoleModel().getRoleCode().equals(SystemConstant.MANAGER)) {
                 return "/admin-home";
             }
         } else {

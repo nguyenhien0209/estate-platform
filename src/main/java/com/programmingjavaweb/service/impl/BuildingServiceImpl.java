@@ -29,6 +29,7 @@ public class BuildingServiceImpl implements BuildingService {
         buildingModel.setCreatedDate(oldBuilding.getCreatedDate());
         buildingModel.setCreatedBy(oldBuilding.getCreatedBy());
         buildingModel.setModifiedDate(new Timestamp(System.currentTimeMillis()));
+        buildingModel.setType(String.join(",", buildingModel.getTypeArrays()));
         buildingDAO.update(buildingModel);
         return buildingDAO.findOne(buildingModel.getId());
     }
