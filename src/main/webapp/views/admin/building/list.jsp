@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@include file="/common/taglib.jsp" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<c:url var="deleteUrl" value="/api-admin-building" />
 <html>
 <head>
     <title>Danh sách tòa nhà</title>
@@ -179,6 +180,29 @@
             }
         });
     });
+
+    $('#btnDelete').click(function (e) {
+        e.preventDefault();
+        var dataArray = $('tbody input[type=checkbox]:checked').map(function () {
+            return $(this).val();
+        }).get();
+        var data = {};
+        data['ids'] = dataArray;
+        $.ajax({
+            url: '${deleteUrl}',
+            type: 'DELETE',
+            contentType: 'application/json',
+            data: JSON.stringify(data),
+            dataType: 'json',
+            success: function () {
+                window.location.href = "<c:url value='/admin-building?type=list&page=1&maxPageItems=2&message=delete_success&alert=success' />"
+            },
+            error: function (error) {
+                window.location.href = "<c:url value='/admin-building?type=list&page=1&maxPageItems=2&message=error_system&alert=danger' />"
+            }
+        })
+    });
+
 </script>
 </body>
 </html>

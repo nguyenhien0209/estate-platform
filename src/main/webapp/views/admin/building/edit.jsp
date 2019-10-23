@@ -385,7 +385,7 @@
             data: JSON.stringify(data),
             dataType: "json",
             success: function (result) {
-                window.location.href = "/admin-building?type=list&page=1&maxPageItems=2&sortName=name&sortBy=desc&message=add_success&alert=success"
+                window.location.href = "<c:url value='/admin-building?type=list&page=1&maxPageItems=2&message=add_success&alert=success' />"
             },
             error: function (error) {
                 console.log(error);
@@ -401,7 +401,7 @@
             data: JSON.stringify(data),
             dataType: "json",
             success: function (result) {
-                window.location.href = "/admin-building?type=list&page=1&maxPageItems=2&sortName=name&sortBy=desc&message=update_success&alert=success"
+                window.location.href = "<c:url value='/admin-building?type=list&page=1&maxPageItems=2&message=update_success&alert=success' />"
             },
             error: function (error) {
                 console.log(error);
