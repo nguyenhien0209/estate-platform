@@ -102,7 +102,6 @@
                                         <thead>
                                         <tr>
                                             <th><input type="checkbox" class="check-box-element" id="checkAll"></th>
-                                            <th>Ngày</th>
                                             <th>Tên Sản Phẩm</th>
                                             <th>Địa chỉ</th>
                                             <th>Tên quản lý</th>
@@ -120,7 +119,6 @@
                                             <tr>
                                                 <td><input type="checkbox" class="check-box-element"
                                                            id="checkbox_${item.id}" value="${item.id}"></td>
-                                                <td></td>
                                                 <td>${item.name}</td>
                                                 <td>${item.street}, ${item.ward}, ${item.district}</td>
                                                 <td>${item.managerName}</td>
@@ -162,7 +160,7 @@
 <script type="text/javascript">
     var totalPages = ${model.totalPages};
     var currentPage = ${model.page};
-    var limit = 2;
+    var limit = 5;
     $(function () {
         window.pagObj = $('#pagination').twbsPagination({
             totalPages: totalPages,

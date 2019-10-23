@@ -1,6 +1,5 @@
 package com.programmingjavaweb.dao.impl;
 
-import com.programmingjavaweb.dao.GenericDAO;
 import com.programmingjavaweb.mapper.RowMapper;
 
 import java.sql.*;
@@ -8,7 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 
-public class AbstractDAO<T> implements GenericDAO<T> {
+public class AbstractDAO<T> {
 
     ResourceBundle resourceBundle = ResourceBundle.getBundle("db");
 
@@ -25,7 +24,6 @@ public class AbstractDAO<T> implements GenericDAO<T> {
         }
     }
 
-    @Override
     public <T> List<T> query(String sql, RowMapper<T> rowMapper, Object... parameters) {
         List<T> result = new ArrayList<>();
         Connection connection = null;
@@ -61,7 +59,6 @@ public class AbstractDAO<T> implements GenericDAO<T> {
         }
     }
 
-    @Override
     public void update(String sql, Object... parameters) {
         Connection connection = null;
         PreparedStatement statement = null;
@@ -94,7 +91,6 @@ public class AbstractDAO<T> implements GenericDAO<T> {
         }
     }
 
-    @Override
     public Long insert(String sql, Object... parameters) {
         Connection connection = null;
         PreparedStatement statement = null;
@@ -140,7 +136,6 @@ public class AbstractDAO<T> implements GenericDAO<T> {
         }
     }
 
-    @Override
     public int count(String sql, Object... parameters) {
         Connection connection = null;
         PreparedStatement statement = null;

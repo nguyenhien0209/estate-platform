@@ -4,6 +4,6 @@ import com.programmingjavaweb.model.DistrictModel;
 
 import java.util.List;
 
-public interface DistrictDAO extends GenericDAO<DistrictModel> {
+public interface DistrictDAO {
     List<DistrictModel> findAll();
 }
