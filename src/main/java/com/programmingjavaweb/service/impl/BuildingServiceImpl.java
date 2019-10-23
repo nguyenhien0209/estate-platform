@@ -1,19 +1,21 @@
 package com.programmingjavaweb.service.impl;
 
 import com.programmingjavaweb.dao.BuildingDAO;
+import com.programmingjavaweb.dao.impl.BuildingDAOImpl;
 import com.programmingjavaweb.model.BuildingModel;
 import com.programmingjavaweb.paging.Pageble;
 import com.programmingjavaweb.service.BuildingService;
-
-import javax.inject.Inject;
 import java.sql.Timestamp;
 import java.util.List;
 import java.util.Map;
 
 public class BuildingServiceImpl implements BuildingService {
 
-    @Inject
     private BuildingDAO buildingDAO;
+
+    public BuildingServiceImpl() {
+        this.buildingDAO = new BuildingDAOImpl();
+    }
 
     @Override
     public BuildingModel save(BuildingModel buildingModel) {
@@ -36,7 +38,7 @@ public class BuildingServiceImpl implements BuildingService {
 
     @Override
     public void delete(Long[] ids) {
-        for(Long id : ids){
+        for (Long id : ids) {
             buildingDAO.delete(id);
         }
     }

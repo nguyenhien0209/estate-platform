@@ -2,15 +2,12 @@ package com.programmingjavaweb.controller.admin.api;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.programmingjavaweb.constant.SystemConstant;
-import com.programmingjavaweb.dao.BuildingDAO;
 import com.programmingjavaweb.model.BuildingModel;
 import com.programmingjavaweb.model.UserModel;
 import com.programmingjavaweb.service.BuildingService;
 import com.programmingjavaweb.service.impl.BuildingServiceImpl;
 import com.programmingjavaweb.utils.HttpUtils;
 import com.programmingjavaweb.utils.SessionUtil;
-
-import javax.inject.Inject;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -21,8 +18,11 @@ import java.io.IOException;
 @WebServlet(urlPatterns = {"/api-admin-building"})
 public class BuildingAPI extends HttpServlet {
 
-    @Inject
     private BuildingService buildingService;
+
+    public BuildingAPI() {
+        this.buildingService = new BuildingServiceImpl();
+    }
 
     protected void doPost (HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {

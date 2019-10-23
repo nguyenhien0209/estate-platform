@@ -7,11 +7,12 @@ import com.programmingjavaweb.paging.PageRequest;
 import com.programmingjavaweb.paging.Pageble;
 import com.programmingjavaweb.service.BuildingService;
 import com.programmingjavaweb.service.DistrictService;
+import com.programmingjavaweb.service.impl.BuildingServiceImpl;
+import com.programmingjavaweb.service.impl.DistrictServiceImpl;
 import com.programmingjavaweb.sort.Sorter;
 import com.programmingjavaweb.utils.FormUtils;
 import com.programmingjavaweb.utils.message.MessageUtils;
 
-import javax.inject.Inject;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -19,17 +20,18 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.util.Arrays;
 import java.util.ResourceBundle;
 
 @WebServlet(urlPatterns = {"/admin-building"})
 public class BuildingController extends HttpServlet {
 
-    @Inject
     private BuildingService buildingService;
-
-    @Inject
     private DistrictService districtService;
+
+    public BuildingController() {
+        this.buildingService = new BuildingServiceImpl();
+        this.districtService = new DistrictServiceImpl();
+    }
 
     ResourceBundle resourceBundle = ResourceBundle.getBundle("message");
 

@@ -5,7 +5,6 @@ import com.programmingjavaweb.dao.impl.UserDAOImpl;
 import com.programmingjavaweb.model.UserModel;
 import com.programmingjavaweb.service.UserService;
 
-import javax.inject.Inject;
 
 public class UserServiceImpl implements UserService {
 
