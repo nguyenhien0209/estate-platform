@@ -10,7 +10,7 @@ public class ConverterUtil {
         for(Field field : fields) {
             try {
                 field.setAccessible(true);
-                field.set(t, rs.getObject(field.getName().toLowerCase()));
+                field.set(t, rs.getObject(field.getName().toLowerCase(), field.getType()));
             } catch (Exception e) {
                 System.out.println(e.getMessage());
             }

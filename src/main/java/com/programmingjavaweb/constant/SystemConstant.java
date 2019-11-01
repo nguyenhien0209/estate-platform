@@ -12,4 +12,5 @@ public class SystemConstant {
     public static final String ALERT = "alert";
     public static final String MESSAGE = "message";
     public static final String MANAGER = "MANAGER";
+    public static final String STAFF = "STAFF";
 }
