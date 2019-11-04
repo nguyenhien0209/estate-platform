@@ -1,12 +1,40 @@
 package com.programmingjavaweb.model;
 
 public class UserModel extends AbstractModel {
+    private Long id;
     private String userName;
     private String fullName;
     private String password;
     private Integer status;
     private Long roleId;
     private RoleModel roleModel = new RoleModel();
+    private String checked = "";
+    private Long buildingId;
+    private String roleCode;
+
+    public String getRoleCode() {
+        return roleCode;
+    }
+
+    public void setRoleCode(String roleCode) {
+        this.roleCode = roleCode;
+    }
+
+    public Long getBuildingId() {
+        return buildingId;
+    }
+
+    public void setBuildingId(Long buildingId) {
+        this.buildingId = buildingId;
+    }
+
+    public String getChecked() {
+        return checked;
+    }
+
+    public void setChecked(String checked) {
+        this.checked = checked;
+    }
 
     public RoleModel getRoleModel() {
         return roleModel;

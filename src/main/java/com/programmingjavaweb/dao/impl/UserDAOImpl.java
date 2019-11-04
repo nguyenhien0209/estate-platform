@@ -15,4 +15,13 @@ public class UserDAOImpl extends AbstractDAO<UserModel> implements UserDAO {
         List<UserModel> models = query(sql.toString(), new UserMapper(), userName, password, status);
         return models.isEmpty() ? null : models.get(0);
     }
+
+    @Override
+    public List<UserModel> findByRoleAndStatus(String roleCode, int status) {
+        StringBuilder sql = new StringBuilder("SELECT * FROM user as u");
+        sql.append(" INNER JOIN role as r ON r.id = u.roleid");
+        sql.append(" WHERE r.roleCode = ? AND u.status = ?");
+        List<UserModel> users = query(sql.toString(), new UserMapper(), roleCode, status);
+        return users;
+    }
 }

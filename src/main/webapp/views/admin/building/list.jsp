@@ -1,7 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@include file="/common/taglib.jsp" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<c:url var="deleteUrl" value="/api-admin-building" />
+<c:url var="deleteUrl" value="/api-admin-building"/>
+<c:url var="userAPI" value="/api-user"/>
 <html>
 <head>
     <title>Danh sách tòa nhà</title>
@@ -27,51 +28,43 @@
                 <div class="row">
                     <div class="col-xs-12">
                         <div class="widget-box table-filter">
-                            <%--<div class="widget-body">--%>
-                            <%--<div class="widget-main">--%>
-                            <%--<div class="form-horizontal">--%>
-                            <%--<div class="form-group">--%>
-                            <%--<label class="col-sm-3 control-label no-padding-right">Tên bài viết</label>--%>
-                            <%--<div class="col-sm-9">--%>
-                            <%--<input type="text" id="title" name="title" class="form-control" value="${model.title}">--%>
-                            <%--</div>--%>
-                            <%--</div>--%>
-                            <%--<div class="form-group">--%>
-                            <%--<label class="col-sm-3 control-label no-padding-right">Loại bài viết</label>--%>
-                            <%--<div class="col-sm-9">--%>
-                            <%--<select class="form-control" id="categoryCode" name="categoryCode">--%>
-                            <%--<c:if test="${empty model.categoryCode}">--%>
-                            <%--<option value="">Chọn loại bài viết</option>--%>
-                            <%--<c:forEach var="item" items="${categories}">--%>
-                            <%--<option value="${item.code}">${item.name}</option>--%>
-                            <%--</c:forEach>--%>
-                            <%--</c:if>--%>
-                            <%--<c:if test="${not empty model.categoryCode}">--%>
-                            <%--<option value="">Chọn loại bài viết</option>--%>
-                            <%--<c:forEach var="item" items="${categories}">--%>
-                            <%--<option value="${item.code}"--%>
-                            <%--<c:if test="${item.code == model.categoryCode}">--%>
-                            <%--selected="selected"--%>
-                            <%--</c:if>>--%>
-                            <%--${item.name}--%>
-                            <%--</option>--%>
-                            <%--</c:forEach>--%>
-                            <%--</c:if>--%>
-                            <%--</select>--%>
-                            <%--</div>--%>
-                            <%--</div>--%>
-                            <%--<div class="form-group">--%>
-                            <%--<label class="col-sm-3 control-label no-padding-right"></label>--%>
-                            <%--<div class="col-sm-9">--%>
-                            <%--<button id="btnSearch" type="button" class="btn btn-sm btn-success">--%>
-                            <%--Tìm kiếm--%>
-                            <%--<i class="ace-icon fa fa-arrow-right icon-on-right bigger-110"></i>--%>
-                            <%--</button>--%>
-                            <%--</div>--%>
-                            <%--</div>--%>
-                            <%--</div>--%>
-                            <%--</div>--%>
-                            <%--</div>--%>
+                            <div class="row">
+                                <div class="col-xs-12">
+                                    <div class="widget-header">
+                                        <h4 class="widget-title">Tìm kiếm</h4>
+                                        <div class="widget-toolbar">
+                                            <a href="#" data-action="collapse">
+                                                <i class="ace-icon fa fa-chevron-up"></i>
+                                            </a>
+                                        </div>
+                                    </div>
+                                    <%--<div class="widget-body">--%>
+                                    <%--<div class="widget-main">--%>
+                                    <%--<div class="form-horizontal">--%>
+                                    <%--<div class="form-group">--%>
+                                    <%--<div class="row">--%>
+                                    <%--<label class="col-sm-2 control-label">Tên Sản phẩm</label>--%>
+                                    <%--</div>--%>
+                                    <%--<div class="col-sm-8">--%>
+                                    <%--<div class="fg-line">--%>
+                                    <%--<input type="text" name="pojo.title" value=""--%>
+                                    <%--class="form-control input-sm"/>--%>
+                                    <%--</div>--%>
+                                    <%--</div>--%>
+                                    <%--</div>--%>
+                                    <%--<div class="form-group">--%>
+                                    <%--<label class="col-sm-2 control-label"></label>--%>
+                                    <%--<div class="col-sm-8">--%>
+                                    <%--<button id="btnSearch" class="btn btn-success btn-sm">--%>
+                                    <%--<i class="ace-icon fa fa-arrow-right icon-on-right bigger-110"></i>--%>
+                                    <%--</button>--%>
+                                    <%--</div>--%>
+                                    <%--</div>--%>
+                                    <%--</div>--%>
+                                    <%--</div>--%>
+                                    <%--</div>--%>
+                                </div>
+                            </div>
                             <br/>
                             <div class="table-btn-controls">
                                 <div class="pull-right tableTools-container">
@@ -98,7 +91,7 @@
                         <div class="row">
                             <div class="col-xs-12">
                                 <div class="table-responsive">
-                                    <table class="table table-bordered">
+                                    <table class="table table-bordered" id="buildingTable">
                                         <thead>
                                         <tr>
                                             <th><input type="checkbox" class="check-box-element" id="checkAll"></th>
@@ -129,6 +122,11 @@
                                                 <td>${item.serviceCost}</td>
                                                 <td>${item.commission}</td>
                                                 <td>
+                                                    <button class="btn btn-xs btn-primary btn-edit"
+                                                            data-toggle="tooltip" type="button" title="Giao tòa nhà"
+                                                            id="btnAssignBuilding" buildingId="${item.id}">
+                                                        <i class="fa fa-tasks"></i>
+                                                    </button>
                                                     <c:url value="/admin-building" var="editURL">
                                                         <c:param name="type" value="edit"/>
                                                         <c:param name="id" value="${item.id}"/>
@@ -157,17 +155,51 @@
         </form>
     </div>
 </div><!-- /.main-content -->
+
+<div class="modal fade" id="assignBuildingModal" role="dialog">
+    <div class="modal-dialog">
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Danh sách nhân viên giao tòa nhà
+                </h4>
+            </div>
+            <div class="modal-body">
+                <table class="table" id="">
+                    <thead>
+                    <tr>
+                        <th>Chọn nhân viên</th>
+                        <th>Tên nhân viên</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><input type="checkbox" class="check-box-element" ></td>
+                            <td>Nguyễn Văn A</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+
+    </div>
+</div>
+
 <script type="text/javascript">
     var totalPages = ${model.totalPages};
     var currentPage = ${model.page};
-    var limit = 5;
+    var limit = 2;
     $(function () {
         window.pagObj = $('#pagination').twbsPagination({
             totalPages: totalPages,
             visiblePages: 10,
             startPage: currentPage,
             onPageClick: function (event, page) {
-                if(page != currentPage) {
+                if (page != currentPage) {
                     $('#page').val(page);
                     $('#maxPageItems').val(limit);
                     $('#sortName').val("name");
@@ -178,6 +210,33 @@
             }
         });
     });
+
+    //Khong can su dung ham find hay closest
+    $('#buildingTable button#btnAssignBuilding').click(function (e) {
+        e.preventDefault();
+        $('#assignBuildingModal').modal();
+        //load user
+        var data = {};
+        data["buildingId"] = $(this).attr('buildingId');
+        data["roleCode"] = 'STAFF';
+        loadUserAssignBuilding($(this).attr('buildingId'), data);
+    });
+
+    function loadUserAssignBuilding(buildingId, data) {
+        $.ajax({
+            url: '${userAPI}',
+            type: "POST",
+            contentType: "application/json",
+            data: JSON.stringify(data),
+            dataType: "json",
+            success: function (result) {
+                console.log(result);
+            },
+            error: function (error) {
+                console.log(error);
+            }
+        })
+    }
 
     $('#btnDelete').click(function (e) {
         e.preventDefault();

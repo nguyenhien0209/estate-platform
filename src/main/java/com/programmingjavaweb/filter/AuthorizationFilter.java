@@ -24,12 +24,10 @@ public class AuthorizationFilter implements Filter {
         HttpServletRequest request = (HttpServletRequest) servletRequest;
         HttpServletResponse response = (HttpServletResponse) servletResponse;
         String url = request.getRequestURI();
-        if(url.startsWith("/admin-user")) {
+        if(url.startsWith("/admin")) {
             UserModel userModel = (UserModel) SessionUtil.getInstance().getValue(request, SystemConstant.USERMODEL);
-            if(userModel != null && userModel.getRoleModel().getRoleCode().equals(SystemConstant.MANAGER)) {
+            if(userModel != null ) {
                 filterChain.doFilter(servletRequest, servletResponse);
-            } else if (userModel != null && userModel.getRoleModel().getRoleCode().equals(SystemConstant.STAFF)) {
-
             } else {
                 response.sendRedirect(request.getContextPath() + "/dang-nhap?action=login&message=not_login&alert=danger");
             }

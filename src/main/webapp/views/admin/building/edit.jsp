@@ -50,7 +50,7 @@
                             <div class="col-sm-9">
                                 <select class="form-control" id="district" name="district">
                                     <c:if test="${empty model.district}">
-                                        <option value=""> -- Chọn quận --</option>
+                                        <option value=""> -- Chọn quận -- </option>
                                         <c:forEach var="item" items="${districts}">
                                             <option value="${item.districtCode}">${item.name}</option>
                                         </c:forEach>
@@ -60,7 +60,7 @@
                                             <option value="${item.districtCode}"
                                                     <c:if test="${item.districtCode == model.district}">
                                                         selected="selected"
-                                                    </c:if>>
+                                                    </c:if>
                                                     ${item.name}
                                             </option>
                                         </c:forEach>

@@ -1,6 +1,7 @@
 package com.programmingjavaweb.model;
 
 public class BuildingModel extends AbstractModel {
+    private Long id;
     private String name;
     private String district;
     private String ward;
@@ -32,6 +33,16 @@ public class BuildingModel extends AbstractModel {
     private String image;
     private String type;
     private String[] typeArrays = new String[]{};
+
+    @Override
+    public Long getId() {
+        return id;
+    }
+
+    @Override
+    public void setId(Long id) {
+        this.id = id;
+    }
 
     public String[] getTypeArrays() {
         return typeArrays;
