@@ -1,7 +1,6 @@
 package com.programmingjavaweb.model;
 
 public class UserModel extends AbstractModel {
-    private Long id;
     private String userName;
     private String fullName;
     private String password;

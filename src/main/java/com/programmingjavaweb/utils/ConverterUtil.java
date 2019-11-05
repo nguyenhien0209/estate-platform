@@ -6,7 +6,18 @@ import java.sql.ResultSet;
 public class ConverterUtil {
 
     public <T> T resultToModel (T t, ResultSet rs) {
-        Field[] fields = t.getClass().getDeclaredFields();
+        Class currentClass = t.getClass();
+        Field[] currentFields = currentClass.getDeclaredFields();
+        convert(currentFields, t, rs);
+        Class parentClass = currentClass.getSuperclass();
+        while(parentClass != null) {
+            convert(parentClass.getDeclaredFields(), t, rs);
+            parentClass = parentClass.getSuperclass();
+        }
+        return t;
+    }
+
+    private <T> T convert(Field[] fields, T t, ResultSet rs) {
         for(Field field : fields) {
             try {
                 field.setAccessible(true);

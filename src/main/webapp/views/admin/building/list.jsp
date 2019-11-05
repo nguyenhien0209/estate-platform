@@ -166,7 +166,7 @@
                 </h4>
             </div>
             <div class="modal-body">
-                <table class="table" id="">
+                <table class="table" id="userAssignmentTable">
                     <thead>
                     <tr>
                         <th>Chọn nhân viên</th>
@@ -230,7 +230,14 @@
             data: JSON.stringify(data),
             dataType: "json",
             success: function (result) {
-                console.log(result);
+                var row = '';
+                $.each(result, function (index, userModel) {
+                    row += '<tr>';
+                    row += '<td><input type="checkbox" class="check-box-element" ' + userModel.checked + ' ></td>';
+                    row += '<td>' + userModel.fullName + '</td>';
+                    row += '</tr>';
+                });
+                $('#userAssignmentTable tbody').html(row);
             },
             error: function (error) {
                 console.log(error);
