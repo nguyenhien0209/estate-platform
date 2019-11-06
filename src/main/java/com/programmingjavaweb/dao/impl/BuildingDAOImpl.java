@@ -1,12 +1,18 @@
 package com.programmingjavaweb.dao.impl;
 
+import com.programmingjavaweb.builder.BuildingBuilder;
 import com.programmingjavaweb.dao.BuildingDAO;
 import com.programmingjavaweb.mapper.BuildingMapper;
 import com.programmingjavaweb.model.BuildingModel;
 import com.programmingjavaweb.paging.Pageble;
 import org.apache.commons.lang.StringUtils;
 
+import java.lang.reflect.Field;
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
+import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Stream;
 
 public class BuildingDAOImpl extends AbstractDAO<BuildingModel> implements BuildingDAO {
     @Override
@@ -59,9 +65,10 @@ public class BuildingDAOImpl extends AbstractDAO<BuildingModel> implements Build
     }
 
     @Override
-    public List<BuildingModel> findAll(Pageble pageble) {
+    public List<BuildingModel> findAll(BuildingBuilder builder, Pageble pageble) {
         StringBuilder sql = new StringBuilder("SELECT * FROM building as b ");
         sql.append(" WHERE 1 = 1");
+        sql = buildNewQuery(sql, builder);
         if(StringUtils.isNotBlank(pageble.getSorter().getSortName()) && StringUtils.isNotBlank(pageble.getSorter().getSortBy())) {
             sql.append(" ORDER BY " + pageble.getSorter().getSortName() + " " + pageble.getSorter().getSortBy() + " ");
         }
@@ -71,9 +78,59 @@ public class BuildingDAOImpl extends AbstractDAO<BuildingModel> implements Build
         return query(sql.toString(), new BuildingMapper());
     }
 
+    private StringBuilder buildNewQuery(StringBuilder sql, BuildingBuilder builder) {
+        Field[] fields = builder.getClass().getDeclaredFields();
+        for(Field field : fields) {
+            String fieldType = field.getType().getName();
+            if(fieldType.equals("java.lang.String")) {
+                String value = getValue(field, String.class, builder);
+                if(StringUtils.isNotBlank(value)) {
+                    sql.append(" AND LOWER (" + field.getName().toLowerCase() +") LIKE '%" + value.toLowerCase() +"%'");
+                }
+            } else if (fieldType.equals("java.lang.Integer")) {
+                Integer value = getValue(field, Integer.class, builder);
+                if( value != null && value != 0) {
+                    sql.append(" AND " + field.getName() + " = " + value);
+                }
+            }
+        }
+        if(builder.getBuildingTypes() != null && builder.getBuildingTypes().length > 0 ){
+            sql.append(" AND ( ").append(" type LIKE '%" + builder.getBuildingTypes()[0] + "%'");
+            Arrays.stream(builder.getBuildingTypes()).filter( item -> !item.equals(builder.getBuildingTypes()[0]))
+            .forEach(item -> sql.append(" OR type LIKE '%" + item + "%'"));
+            sql.append(" ) ");
+        }
+        return sql;
+    }
+
+    private<T> T getValue(Field field, Class<T> clazz, BuildingBuilder builder) {
+        Object result = null;
+        Method getter = getGetter(field, builder);
+        if(getter != null) {
+            try {
+                result = getter.invoke(builder);
+            } catch (IllegalAccessException | InvocationTargetException e) {
+                e.printStackTrace();
+            }
+        }
+        return clazz.cast(result);
+    }
+
+    private Method getGetter(Field field, BuildingBuilder builder) {
+        String getterName = "get" + StringUtils.capitalize(field.getName());
+        try {
+            return builder.getClass().getMethod(getterName);
+        } catch (NoSuchMethodException e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
     @Override
-    public int getTotalItem() {
+    public int getTotalItem(BuildingBuilder builder) {
         StringBuilder sql = new StringBuilder("SELECT count(*) FROM building ");
+        sql.append(" WHERE 1 = 1");
+        buildNewQuery(sql, builder);
         return count(sql.toString());
     }
 }

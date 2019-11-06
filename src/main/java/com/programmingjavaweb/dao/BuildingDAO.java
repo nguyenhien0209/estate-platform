@@ -1,5 +1,6 @@
 package com.programmingjavaweb.dao;
 
+import com.programmingjavaweb.builder.BuildingBuilder;
 import com.programmingjavaweb.model.BuildingModel;
 import com.programmingjavaweb.paging.Pageble;
 
@@ -10,6 +11,6 @@ public interface BuildingDAO  {
     void update(BuildingModel buildingModel);
     void delete (Long id);
     BuildingModel findOne(Long id);
-    List<BuildingModel> findAll (Pageble pageble);
-    int getTotalItem();
+    List<BuildingModel> findAll (BuildingBuilder builder, Pageble pageble);
+    int getTotalItem(BuildingBuilder builder);
 }

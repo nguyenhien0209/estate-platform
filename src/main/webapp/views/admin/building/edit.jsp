@@ -58,9 +58,9 @@
                                     <c:if test="${not empty model.district}">
                                         <c:forEach var="item" items="${districts}">
                                             <option value="${item.districtCode}"
-                                                    <c:if test="${item.districtCode == model.district}">
+                                                    <c:if test="${item.districtCode eq model.district}">
                                                         selected="selected"
-                                                    </c:if>
+                                                    </c:if>>
                                                     ${item.name}
                                             </option>
                                         </c:forEach>
@@ -283,7 +283,7 @@
                                 <c:if test="${empty model.id}">
                                     <c:forEach var="item" items="${buildingType}">
                                         <input type="checkbox" value="${item}" id="checkbox_${item}"
-                                               name="typeArrays">${item.value}
+                                               name="typeArrays">${item.value}>
                                         <br/>
                                     </c:forEach>
                                 </c:if>
@@ -291,7 +291,7 @@
                                     <c:forEach var="item" items="${buildingType}">
                                         <input type="checkbox" value="${item}" id="checkbox_${item}" name="typeArrays"
                                         <c:forEach var="itemTemp" items="${model.typeArrays}">
-                                        <c:if test="${itemTemp eq item}">
+                                        <c:if test="${itemTemp == item}">
                                                checked
                                         </c:if>
                                         </c:forEach>

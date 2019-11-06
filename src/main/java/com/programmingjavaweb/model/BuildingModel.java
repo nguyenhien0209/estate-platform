@@ -31,7 +31,17 @@ public class BuildingModel extends AbstractModel {
     private String location;
     private String image;
     private String type;
+    private String[] buildingTypes;
     private String[] typeArrays = new String[]{};
+
+
+    public String[] getBuildingTypes() {
+        return buildingTypes;
+    }
+
+    public void setBuildingTypes(String[] buildingTypes) {
+        this.buildingTypes = buildingTypes;
+    }
 
     public String[] getTypeArrays() {
         return typeArrays;

@@ -15,4 +15,18 @@ public class AssignmentDAOImpl extends AbstractDAO<AssignmentBuildingModel> impl
         List<AssignmentBuildingModel> assignmentBuildingModels = query(sql.toString(), new AssignmentBuildingMapper() , userId, buildingId);
         return assignmentBuildingModels.isEmpty() ? null : assignmentBuildingModels.get(0);
     }
+
+    @Override
+    public void deleteByBuildingId(Long buildingId) {
+        String sql = "DELETE FROM assignmentbuilding WHERE buildingid = ?";
+        update(sql, buildingId);
+    }
+
+    @Override
+    public void save(Long userId, Long buildingId) {
+        StringBuilder sql = new StringBuilder("INSERT INTO assignmentbuilding ( ");
+        sql.append(" staffid, buildingid )");
+        sql.append(" VALUES (?, ?) ");
+        insert(sql.toString(), userId, buildingId);
+    }
 }

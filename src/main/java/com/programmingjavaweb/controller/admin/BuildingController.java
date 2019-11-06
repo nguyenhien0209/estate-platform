@@ -1,5 +1,6 @@
 package com.programmingjavaweb.controller.admin;
 
+import com.programmingjavaweb.builder.BuildingBuilder;
 import com.programmingjavaweb.constant.SystemConstant;
 import com.programmingjavaweb.enums.BuildingTypeEnum;
 import com.programmingjavaweb.model.BuildingModel;
@@ -41,8 +42,9 @@ public class BuildingController extends HttpServlet {
         String view = "";
         if(model.getType().equals(SystemConstant.LIST)) {
             Pageble pageble = new PageRequest(model.getPage(), model.getMaxPageItems(), new Sorter(model.getSortName(), model.getSortBy()));
-            model.setListResult(buildingService.findAll(pageble));
-            model.setTotalItems(buildingService.getTotalItem());
+            BuildingBuilder buildingBuilder = initBuildingBuider(model);
+            model.setListResult(buildingService.findAll(buildingBuilder, pageble));
+            model.setTotalItems(buildingService.getTotalItem(buildingBuilder));
             model.setTotalPages((int)Math.ceil((double)model.getTotalItems() / model.getMaxPageItems()));
             view = "/views/admin/building/list.jsp";
         } else if (model.getType().equals(SystemConstant.EDIT)) {
@@ -59,6 +61,15 @@ public class BuildingController extends HttpServlet {
         request.setAttribute(SystemConstant.MODEL, model);
         RequestDispatcher rd = request.getRequestDispatcher(view);
         rd.forward(request, response);
+    }
+
+    private BuildingBuilder initBuildingBuider(BuildingModel model) {
+        BuildingBuilder builder = new BuildingBuilder.Builder()
+                .setName(model.getName())
+                .setStreet(model.getStreet())
+                .setNumberOfBasement(model.getNumberOfBasement())
+                .setBuildingTypes(model.getBuildingTypes()).build();
+        return builder;
     }
 
     protected void doPost (HttpServletRequest request, HttpServletResponse response)

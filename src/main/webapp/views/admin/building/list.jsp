@@ -3,6 +3,7 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <c:url var="deleteUrl" value="/api-admin-building"/>
 <c:url var="userAPI" value="/api-user"/>
+<c:url var="assignAPI" value="/api-assignment-building"/>
 <html>
 <head>
     <title>Danh sách tòa nhà</title>
@@ -28,41 +29,50 @@
                 <div class="row">
                     <div class="col-xs-12">
                         <div class="widget-box table-filter">
-                            <div class="row">
-                                <div class="col-xs-12">
-                                    <div class="widget-header">
-                                        <h4 class="widget-title">Tìm kiếm</h4>
-                                        <div class="widget-toolbar">
-                                            <a href="#" data-action="collapse">
-                                                <i class="ace-icon fa fa-chevron-up"></i>
-                                            </a>
+                            <div class="widget-body">
+                                <div class="widget-main">
+                                    <div class="form-horizontal">
+                                        <div class="form-group">
+                                            <label class="col-sm-3 control-label no-padding-right">Tên tòa nhà</label>
+                                            <div class="col-sm-9">
+                                                <input type="text" id="name" name="name" class="form-control"
+                                                       value="${model.name}">
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="col-sm-3 control-label no-padding-right">Đường</label>
+                                            <div class="col-sm-9">
+                                                <input type="text" id="street" name="street" class="form-control"
+                                                       value="${model.street}">
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="col-sm-3 control-label no-padding-right">Số tầng hầm</label>
+                                            <div class="col-sm-9">
+                                                <input type="number" id="numberOfBasement" name="numberOfBasement"
+                                                       class="form-control" value="${model.numberOfBasement}">
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="col-sm-3 control-label no-padding-right"></label>
+                                            <label class="col-sm-9">
+                                                <c:forEach var="type" items="${buildingType}">
+                                                    <input type="checkbox" class="form-check-input" name="buildingTypes"
+                                                           value="${type}">
+                                                    <label>${type.value}</label>
+                                                </c:forEach>
+                                            </label>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="col-sm-3 control-label no-padding-right"></label>
+                                            <div class="col-sm-9">
+                                                <button id="btnSearch" type="button" class="btn btn-sm btn-success">
+                                                    Tìm kiếm
+                                                    <i class="ace-icon fa fa-arrow-right icon-on-right bigger-110"></i>
+                                                </button>
+                                            </div>
                                         </div>
                                     </div>
-                                    <%--<div class="widget-body">--%>
-                                    <%--<div class="widget-main">--%>
-                                    <%--<div class="form-horizontal">--%>
-                                    <%--<div class="form-group">--%>
-                                    <%--<div class="row">--%>
-                                    <%--<label class="col-sm-2 control-label">Tên Sản phẩm</label>--%>
-                                    <%--</div>--%>
-                                    <%--<div class="col-sm-8">--%>
-                                    <%--<div class="fg-line">--%>
-                                    <%--<input type="text" name="pojo.title" value=""--%>
-                                    <%--class="form-control input-sm"/>--%>
-                                    <%--</div>--%>
-                                    <%--</div>--%>
-                                    <%--</div>--%>
-                                    <%--<div class="form-group">--%>
-                                    <%--<label class="col-sm-2 control-label"></label>--%>
-                                    <%--<div class="col-sm-8">--%>
-                                    <%--<button id="btnSearch" class="btn btn-success btn-sm">--%>
-                                    <%--<i class="ace-icon fa fa-arrow-right icon-on-right bigger-110"></i>--%>
-                                    <%--</button>--%>
-                                    <%--</div>--%>
-                                    <%--</div>--%>
-                                    <%--</div>--%>
-                                    <%--</div>--%>
-                                    <%--</div>--%>
                                 </div>
                             </div>
                             <br/>
@@ -174,15 +184,16 @@
                     </tr>
                     </thead>
                     <tbody>
-                        <tr>
-                            <td><input type="checkbox" class="check-box-element" ></td>
-                            <td>Nguyễn Văn A</td>
-                        </tr>
                     </tbody>
                 </table>
+                <div id="fieldHidden">
+
+                </div>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary" id="btnAssignBuildingForStaff" data-dismiss="modal">Giao
+                    tòa nhà
+                </button>
             </div>
         </div>
 
@@ -217,10 +228,41 @@
         $('#assignBuildingModal').modal();
         //load user
         var data = {};
-        data["buildingId"] = $(this).attr('buildingId');
+        var buildingId = $(this).attr('buildingId');
+        data["buildingId"] = buildingId;
         data["roleCode"] = 'STAFF';
+        var buildingIdHidden = '<input type="hidden" name="buildingId" id="buildingId" value="' + buildingId + '">';
+        $('#fieldHidden').html(buildingIdHidden);
         loadUserAssignBuilding($(this).attr('buildingId'), data);
     });
+
+    $('#btnAssignBuildingForStaff').click(function (e) {
+        e.preventDefault();
+        var buildingId = $('#fieldHidden').find('#buildingId').val();
+        var users = $('#userAssignmentTable').find('tbody input[type=checkbox]:checked').map(function () {
+            return $(this).val();
+        }).get();
+        var data = {};
+        data["buildingId"] = buildingId;
+        data["ids"] = users;
+        assignBuildingForStaff(data)
+    });
+
+    function assignBuildingForStaff(data) {
+        $.ajax({
+            url: '${assignAPI}',
+            type: "PUT",
+            contentType: "application/json",
+            data: JSON.stringify(data),
+            dataType: "json",
+            success: function (result) {
+                window.location.href = "<c:url value='/admin-building?type=list&page=1&maxPageItems=2&message=assign_building_success&alert=success' />"
+            },
+            error: function (error) {
+                window.location.href = "<c:url value='/admin-building?type=list&page=1&maxPageItems=2&message=error_system&alert=danger' />"
+            }
+        })
+    }
 
     function loadUserAssignBuilding(buildingId, data) {
         $.ajax({
@@ -233,7 +275,7 @@
                 var row = '';
                 $.each(result, function (index, userModel) {
                     row += '<tr>';
-                    row += '<td><input type="checkbox" class="check-box-element" ' + userModel.checked + ' ></td>';
+                    row += '<td><input type="checkbox" id="checkbox_' + userModel.id + '" value="' + userModel.id + '" class="check-box-element" ' + userModel.checked + ' ></td>';
                     row += '<td>' + userModel.fullName + '</td>';
                     row += '</tr>';
                 });
@@ -265,6 +307,13 @@
                 window.location.href = "<c:url value='/admin-building?type=list&page=1&maxPageItems=2&message=error_system&alert=danger' />"
             }
         })
+    });
+
+    $('#btnSearch').click(function () {
+        $('#maxPageItems').val(limit);
+        $('#page').val(1);
+        $('#type').val("list");
+        $('#formSubmit').submit();
     });
 
 </script>

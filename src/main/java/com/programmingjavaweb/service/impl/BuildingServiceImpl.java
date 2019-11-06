@@ -1,5 +1,6 @@
 package com.programmingjavaweb.service.impl;
 
+import com.programmingjavaweb.builder.BuildingBuilder;
 import com.programmingjavaweb.dao.BuildingDAO;
 import com.programmingjavaweb.dao.impl.BuildingDAOImpl;
 import com.programmingjavaweb.model.BuildingModel;
@@ -44,13 +45,13 @@ public class BuildingServiceImpl implements BuildingService {
     }
 
     @Override
-    public List<BuildingModel> findAll(Pageble pageble) {
-        return buildingDAO.findAll(pageble);
+    public List<BuildingModel> findAll(BuildingBuilder builder, Pageble pageble) {
+        return buildingDAO.findAll(builder, pageble);
     }
 
     @Override
-    public int getTotalItem() {
-        return buildingDAO.getTotalItem();
+    public int getTotalItem(BuildingBuilder builder) {
+        return buildingDAO.getTotalItem(builder);
     }
 
     @Override
