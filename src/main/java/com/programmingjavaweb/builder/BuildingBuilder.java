@@ -4,7 +4,7 @@ public class BuildingBuilder {
     private String name;
     private String street;
     private Integer numberOfBasement;
-    private String[] buildingTypes;
+    private String[] buildingTypes = new String[]{};
 
     public BuildingBuilder(Builder builder) {
         this.name = builder.name;
